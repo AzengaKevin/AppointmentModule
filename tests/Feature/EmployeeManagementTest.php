@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Models\User;
+use App\Models\Admin;
 use App\Models\Employee;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -11,6 +12,23 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class EmployeeManagementTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function setup() : void
+    {
+        parent::setUp();
+
+        $this->artisan('passport:install');
+        
+        $admin = Admin::create();
+
+        $admin->user()->create([
+            'name' => 'Super Admin',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('elephant69')
+        ]);
+
+        $this->actingAs($admin->user, 'api');
+    }
     
     /** @group employee */
     public function test_employee_creation_endpoint()
@@ -20,8 +38,6 @@ class EmployeeManagementTest extends TestCase
         $response = $this->json('POST', route('employees.store'), $this->data());
 
         $this->assertEquals(1, Employee::count());
-
-        $this->assertEquals(1, User::count());
 
         $employee = Employee::first();
 

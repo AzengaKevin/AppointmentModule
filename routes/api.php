@@ -14,16 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => ['auth:api']], function () {
+    
+    Route::resource('employees', 'EmployeeController')
+        ->except('create', 'edit');
+    
+    Route::resource('tasks', 'TaskController')
+        ->except('create', 'edit');
+    
+    Route::resource('employees.tasks', 'EmployeeTaskController');
+
 });
-
-Route::resource('employees', 'EmployeeController')
-    ->except('create', 'edit');
-
-Route::resource('tasks', 'TaskController')
-    ->except('create', 'edit');
-
-Route::resource('employees.tasks', 'EmployeeTaskController');
-
+    
 Route::post('login', 'UserController@login')->name('login');
+
