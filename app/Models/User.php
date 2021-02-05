@@ -40,4 +40,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Openning the user class for extension by other classes
+     */
+    public function authenticable()
+    {
+        return $this->morphTo();
+    }
 }
