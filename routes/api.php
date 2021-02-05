@@ -25,3 +25,5 @@ Route::resource('tasks', 'TaskController')
     ->except('create', 'edit');
 
 Route::resource('employees.tasks', 'EmployeeTaskController');
+
+Route::post('login', 'UserController@login')->name('login');
