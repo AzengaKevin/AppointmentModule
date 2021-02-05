@@ -32,4 +32,10 @@ class Employee extends Model
     {
         return ['Junior', 'Middle', 'Senior'];
     }
+
+    protected $casts = [
+        'languages' => 'array',
+        'availability' => 'array',
+        'contact' => 'array'
+    ];
 }

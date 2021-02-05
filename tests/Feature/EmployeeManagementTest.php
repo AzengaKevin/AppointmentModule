@@ -27,10 +27,8 @@ class EmployeeManagementTest extends TestCase
 
         $this->assertNotNull($employee->user);
 
-        $response->assertOk();
-
         $response->assertJsonStructure([
-            'data', 'errors'
+            'data'
         ]);
     }
 
