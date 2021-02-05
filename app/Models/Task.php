@@ -11,4 +11,13 @@ class Task extends Model
 
     protected $fillable = ['name', 'description', 'completed'];
 
+
+    /**
+     * Task Employee Relationship M : N
+     */
+    public function employees()
+    {
+        return $this->belongsToMany(Employee::class);
+    }
+
 }

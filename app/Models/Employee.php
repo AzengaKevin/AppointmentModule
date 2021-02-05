@@ -11,6 +11,13 @@ class Employee extends Model
 
     protected $fillable = ['rung', 'languages', 'availability', 'contact'];
 
+    
+    protected $casts = [
+        'languages' => 'array',
+        'availability' => 'array',
+        'contact' => 'array'
+    ];
+
     /**
      * An employee table extends the users table
      * 
@@ -20,6 +27,14 @@ class Employee extends Model
     {
         return $this->morphOne(User::class, 'authenticable');
 
+    }
+
+    /**
+     * Employee Task Relationship M : N
+     */
+    public function tasks()
+    {
+        return $this->belongsToMany(Task::class);
     }
 
     /**
@@ -33,9 +48,4 @@ class Employee extends Model
         return ['Junior', 'Middle', 'Senior'];
     }
 
-    protected $casts = [
-        'languages' => 'array',
-        'availability' => 'array',
-        'contact' => 'array'
-    ];
 }

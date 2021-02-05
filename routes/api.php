@@ -23,3 +23,5 @@ Route::resource('employees', 'EmployeeController')
 
 Route::resource('tasks', 'TaskController')
     ->except('create', 'edit');
+
+Route::resource('employees.tasks', 'EmployeeTaskController');

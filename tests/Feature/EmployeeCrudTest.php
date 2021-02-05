@@ -70,13 +70,13 @@ class EmployeeCrudTest extends TestCase
 
         Employee::create([
             'rung' => Employee::rungs()[random_int(0, 2)],
-            'languages' => json_encode(['JAVA','PHP', 'JavaScript', 'Kotlin']),
-            'availability' => json_encode($availability),
-            'contact' => json_encode([
+            'languages' => ['JAVA','PHP', 'JavaScript', 'Kotlin'],
+            'availability' => $availability,
+            'contact' => [
                 'phone' => '+254700016349',
                 'twitter' => 'https://twitter.com/AzengaKevin4',
                 'facebook' => 'https://web.facebook.com/azenga.kevin.1'
-            ])
+            ]
         ]);
 
 
